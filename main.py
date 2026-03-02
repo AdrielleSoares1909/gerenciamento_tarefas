@@ -59,23 +59,23 @@ def atualizar_tarefas():
 
 @app.get('/tarefas/{tarefa_id}')
 def obter_tarefa(tarefa_id: str):
-    for tarefa in banco:
-        if tarefa.id == tarefa_id:
-            return tarefa
+    for tarefa in banco: # PARA CADA TAREFA NO BANCO 
+        if tarefa.id == tarefa_id: # SE A TAREFA FOR IGUAL A TAREFA DA ROTA = ENCONTREI A TAREFA
+            return tarefa # RETORNA A TAREFA
     return {'Erro:' 'Tarefa nao encontrada'}
 
 
 @app.delete('/tarefas/{tarefa_id}')
 def deletar_tarefas(tarefa_id: str):
-    posicao = -1
-    # buscar a posicao da tarefa
-    for index, tarefa in enumerate(banco):
-        if tarefa.id == tarefa_id:
+    posicao = -1 # DESCOBRIR A POSICAO DA TAREFA
+    # buscar a posicao da tarefa 
+    for index, tarefa in enumerate(banco): # PARA CADA TAREFA EU QUERO A POSICAO E O OBJETO
+        if tarefa.id == tarefa_id: # SE A TAREFA FOR IGUAL A TAREFA JA REGISTRADA 
             posicao = index
             break
 
-    if posicao != -1:
-        banco.pop(posicao)
+    if posicao != -1: # SE A POSSICAO FOR DIFERENTE DE -1 = ENCONTROU
+        banco.pop(posicao) # DENTRO DO BANCO REMOVE O OBJETO DAQUELA POSICAO
         return {'Mensagem': 'Terefa removida com sucesso'}
     else:
         return {'Mensagem': "Tarefa nao localizada"}
